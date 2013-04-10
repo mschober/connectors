@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function current-server {
+    cat $HOME/.current_server
+}

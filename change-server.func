@@ -1,0 +1,17 @@
+#!/bin/bash
+
+source $FUNCTIONS/now.func
+
+CURRENT_SERVER=$HOME/.current_server
+SERVER_HISTORY=$HOME/.server_history
+SERVER_LIST=$HOME/.server_list
+
+function change-server {
+    [[ $# == 0 ]] && echo needs a server match string && return
+    NEW_SERVER_SEARCH="$1"
+    NEW_SERVER=$(grep $NEW_SERVER_SEARCH $SERVER_LIST)
+    [[ -z $NEW_SERVER ]] && echo -e "no matches in [$(cat $SERVER_LIST)\n] for $NEW_SERVER_SEARCH && return || echo $NEW_SERVER"
+    echo "$(now) $NEW_SERVER" >> $SERVER_HISTORY
+    awk '{ print $2 }' $SERVER_HISTORY | sort -u > $SERVER_LIST
+    echo $NEW_SERVER > $CURRENT_SERVER
+}

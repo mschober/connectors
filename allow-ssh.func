@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+function allow-ssh {
+    if [[ ! $(ssh-add -l) =~ $(whoami) ]]; then
+        ssh-add $HOME/.ssh/id_rsa
+    fi
+}
