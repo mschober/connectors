@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export CURRENT_SERVER=$HOME/.current_server
+export SERVER_HISTORY=$HOME/.server_history
+export SERVER_LIST=$HOME/.server_list
+
