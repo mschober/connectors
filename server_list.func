@@ -1,5 +1,10 @@
 #!/bin/bash
 
 function server-list {
-    cat $HOME/.server_list
+  i=1
+  for line in $(cat $HOME/.server_list);
+  do
+    echo [$i] $line
+    i=$(( $i + 1))
+  done
 }
