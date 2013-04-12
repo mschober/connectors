@@ -1,8 +1,12 @@
 #!/bin/bash
 
+source $FUNCTIONS/shared.func
+source $FUNCTIONS/global.var
+
 function new-server {
     [[ $# == 0 ]] && echo "needs a hostname or ip" && return
     HOST=$1
     [[ $(ping -o $HOST 2>&1 >/dev/null | tr '[:upper:]' '[:lower:]') =~ "unknown host" ]] && echo "ping can't find $HOST" && return
     echo $HOST > $HOME/.current_server
+    _SAVE_TO_SERVER_HISTORY $HOST
 }

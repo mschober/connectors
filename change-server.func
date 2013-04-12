@@ -2,13 +2,14 @@
 
 source $FUNCTIONS/now.func
 source $FUNCTIONS/global.var
+source $FUNCTIONS/shared.func
 
-function _SAVE_TO_SERVER_HISTORY {
-    [[ $# == 0 ]] && echo needs a server to save to history && return
-    [[ -z $SERVER_HISTORY ]] && echo "need to source $FUNCTIONS/global.var"
-    NEW_SERVER=$1
-    echo "$(now) $NEW_SERVER" >> $SERVER_HISTORY
-}
+#function _SAVE_TO_SERVER_HISTORY {
+#    [[ $# == 0 ]] && echo needs a server to save to history && return
+#    [[ -z $SERVER_HISTORY ]] && echo "need to source $FUNCTIONS/global.var"
+#    NEW_SERVER=$1
+#    echo "$(now) $NEW_SERVER" >> $SERVER_HISTORY
+#}
 
 function _UPDATE_SERVER_LIST {
     [[ $# != 0 ]] && echo "expects no arguments" && return
