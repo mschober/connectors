@@ -3,12 +3,35 @@
 source $FUNCTIONS/now.func
 source $FUNCTIONS/global.var
 
+function _SAVE_TO_SERVER_HISTORY {
+    [[ $# == 0 ]] && echo needs a server to save to history && return
+    [[ -z $SERVER_HISTORY ]] && echo "need to source $FUNCTIONS/global.var"
+    NEW_SERVER=$1
+    echo "$(now) $NEW_SERVER" >> $SERVER_HISTORY
+}
+
+function _UPDATE_SERVER_LIST {
+    [[ $# != 0 ]] && echo "expects no arguments" && return
+    [[ -z $SERVER_HISTORY || -z $SERVER_LIST ]] && echo "need to source $FUNCTIONS/global.var" && return
+    awk '{ print $2 }' $SERVER_HISTORY | sort -u > $SERVER_LIST
+}
+
+function _MATCHING_SERVERS_LIST {
+    [[ $# != 2 ]] && echo "need a new server search and server list params"
+    NEW_SERVER_SEARCH=$1
+    SERVER_LIST=$2
+
+    MATCHES=$(grep $NEW_SERVER_SEARCH $SERVER_LIST --color=never)
+    echo $MATCHES
+}
+
 function change-server {
     [[ $# == 0 ]] && current-server && return
     NEW_SERVER_SEARCH=$1
-    NEW_SERVER=$(cat $SERVER_LIST | awk "/$NEW_SERVER_SEARCH/ { print }")
+    NEW_SERVER=$(_MATCHING_SERVERS_LIST $NEW_SERVER_SEARCH $SERVER_LIST)
+    NEW_SERVER=$(echo $NEW_SERVER | cut -d ' ' -f1)
     [[ -z $NEW_SERVER ]] && echo -e "no matches in [$(cat $SERVER_LIST)\n] for $NEW_SERVER_SEARCH" && return || echo $NEW_SERVER
-    echo "$(now) $NEW_SERVER" >> $SERVER_HISTORY
-    awk '{ print $2 }' $SERVER_HISTORY | sort -u > $SERVER_LIST
+    _SAVE_TO_SERVER_HISTORY $NEW_SERVER
+    _UPDATE_SERVER_LIST
     echo $NEW_SERVER > $CURRENT_SERVER
 }
