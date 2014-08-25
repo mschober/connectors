@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function remove-server(){
+  SERVER=$1
+  echo "Removing following historical server entries: $(grep $SERVER $HOME/.server_history)"
+  sed -i '' "/$SERVER/d" $HOME/.server_history
+}

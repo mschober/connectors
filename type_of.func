@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function type_of(){
+  type $1 | awk -F " is " '{ print $2}'
+}
