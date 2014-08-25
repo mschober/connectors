@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function buckets-trimmed(){
+  full_paths | sed 's;/$;;' | awk -F '/' '{ print $NF }'
+}

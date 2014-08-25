@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function x_hms(){
+  echo $(( 10#$(date +%H) * 10#$(date +%M) * 10#$(date +%S) ))
+}

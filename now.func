@@ -3,3 +3,7 @@
 function now {
   date +%Y_%m_%d-%H:%M:%S
 }
+
+function _DATE(){
+  date "+%Y-%m-%d__h%H_m%M_s%S"
+}

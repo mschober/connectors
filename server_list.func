@@ -1,10 +1,11 @@
 #!/bin/bash
 
 function server-list {
-  i=1
-  for line in $(cat $HOME/.server_list);
+  SERVERS=$(cat $HOME/.server_list)
+  index=1
+  for server in $SERVERS
   do
-    echo [$i] $line
-    i=$(( $i + 1))
+    echo "[$index]	$server"
+    index=$(( $index + 1))
   done
 }

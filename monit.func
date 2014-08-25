@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function monit-reload(){
+    SERVER=$1
+
+    ssh $SERVER "sudo -E -u root monit reload"
+}

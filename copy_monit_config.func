@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function copy-monit-config(){
+    SRC_SERVER=$1
+    TGT_SERVER=$2
+    FILE=$3
+
+    echo "Copying $FILE from $SRC_SERVER to $TGT_SERVER"
+    ssh $SRC_SERVER "sudo -E -u root cat $FILE" \
+  | ssh $TGT_SERVER "sudo -E -u root bash -c 'cat - > $FILE'"
+}

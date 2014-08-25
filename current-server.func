@@ -1,5 +1,9 @@
 #!/bin/bash
 
-function current-server {
+function current-server_orig {
     cat $HOME/.current_server
+}
+
+function current-server(){
+  python $HOME/functions/python/current_server.py
 }

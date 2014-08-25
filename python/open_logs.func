@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+
+import sys
+
+def open_logs(mount_string):
+    if 'file:\\' in mount_string:
+        return mount_string 
+
+mount_string = sys.argv[1]
+print repr(open_logs(mount_string))
+

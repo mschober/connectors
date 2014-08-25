@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function _NEW_PASS(){
+  KEY=$( echo $(( $(x_hms) * 10#$(date +%d) )) )
+  WORD=$(extract_word $KEY)
+  SED_CMD="sed -E \
+    -e 's;o;0;g' \
+    -e 's;e;3;g' 
+    "
+  PASS=$( eval "echo ${WORD}#${KEY} | $SED_CMD" )
+  PASS="$(tr '[:lower:]' '[:upper:]' <<< ${PASS:0:1})${PASS:1}"
+  echo "$PASS"
+}
+

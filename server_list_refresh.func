@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function server-list-refresh {
+  SERVERS=$(cat $HOME/.server_list)
+  index=1
+  for server in $SERVERS
+  do
+    echo "[$index]	$(host $server | grep -v "not found" | sed -e 's/chel/dev	chel/' -e 's/che-/prod	che-/' -e 's/chsxe/prod	chsxe/' -e 's/localhost/local	localhost/' -e 's/ has address /	/')"
+    index=$(( $index + 1))
+  done
+}

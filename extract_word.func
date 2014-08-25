@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DICT=/usr/share/dict/words
+
+function extract_word(){
+  line_number=$1
+  awk -v line=$line_number 'NR==line { print }' $DICT
+}
