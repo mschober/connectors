@@ -1,0 +1,3 @@
+#!/bin/bash
+
+function check_grant ()  {  hive --silent -e "show grant user $1 on database $2" | grep --silent "^privilege"; }
