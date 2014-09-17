@@ -1,0 +1,8 @@
+#!/bin/bash
+
+function mvn-generate(){
+  PROJECT_NAME=${1:-$(date "+%F")}
+  PROJECT_PACKAGE=${2:-org.coursera.algorithms}
+
+  mvn archetype:generate -DgroupId=$PROJECT_PACKAGE -DartifactId=$PROJECT_NAME -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+}

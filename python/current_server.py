@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+from __future__ import print_function
+import sys
 
 
 def current_server():
@@ -9,4 +10,5 @@ def current_server():
 
     return get_server()
 
-print current_server()
+print(current_server())
+print('spam', file=sys.stderr)

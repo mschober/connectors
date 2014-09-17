@@ -14,7 +14,7 @@ source $FUNCTIONS/shared.func
 function _UPDATE_SERVER_LIST {
     [[ $# != 0 ]] && echo "expects no arguments" && return
     [[ -z $SERVER_HISTORY || -z $SERVER_LIST ]] && echo "need to source $FUNCTIONS/global.var" && return
-    awk '{ print $2 }' $SERVER_HISTORY | sort -u | cat -b > $SERVER_LIST
+    awk '{ print $2 }' $SERVER_HISTORY | sort -u | grep -v -f $HOME/.server_banlist | cat -b > $SERVER_LIST
 }
 
 function _MATCHING_SERVERS_LIST {

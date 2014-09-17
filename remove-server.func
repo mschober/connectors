@@ -1,7 +1,14 @@
 #!/bin/bash
 
 function remove-server(){
-  SERVER=$1
-  echo "Removing following historical server entries: $(grep $SERVER $HOME/.server_history)"
-  sed -i '' "/$SERVER/d" $HOME/.server_history
+  SERVER="${1}$"
+  if ! grep --silent "$SERVER" $HOME/.server_list; then
+    echo "Couldn't find ($SERVER) in $HOME/.server_list"
+    return
+  elif grep --silent "$SERVER" $HOME/.server_banlist; then
+    echo "($SERVER) already banned!"
+    return
+  fi
+  echo "Adding ($1) to $HOME/.server_banlist"
+  echo "$1" >> $HOME/.server_banlist
 }
