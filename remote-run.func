@@ -1,17 +1,16 @@
 #!/bin/bash
 
 function remote-run(){
-  if [[ $# == 2 ]]; then
-    ARGS="$(cat $2 | sed -e 's;(;\\(;g' -e 's;);\\);g' -e "s;';\\';g")"
-  else
-    ARGS="$@"
-  fi
+  #if [[ $# == 2 ]]; then
+  #  ARGS="$(cat $2 | sed -e 's;(;\\(;g' -e 's;);\\);g' -e "s;';\\';g")"
+  #else
+  #  ARGS="$@"
+  #fi
 
   export FAB_ENV=/Users/mschober/dev/lng/python/manual/env
   #HOST_LIST=${HOSTS-:$(seq -f $HOST_PREFIX%02g $HOST_COUNT)}
-  HOSTS="$(grep -v "#" $HOME/.hosts | paste -sd "," -)"
-  CMD=$(echo $FAB_ENV/bin/fab -H "$HOSTS" -- $(cat $2 | sed -e 's;(;\\(;g' -e 's;);\\);g' -e "s;';\\';g" -e 's;";\\"";g'))
-  #"'$ARGS'")
+  HOSTS="$(egrep -v "#|^$" $HOME/.hosts | paste -sd "," -)"
+  CMD=$(echo $FAB_ENV/bin/fab -H "$HOSTS" -- $1)
   echo $CMD
   eval $CMD
 }

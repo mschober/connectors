@@ -1,0 +1,14 @@
+#!/bin/bash
+
+source $HOME/functions/now.func
+source $HOME/functions/today.func
+
+function log(){
+  if [[ $# < 1 ]]; then
+    cmd="cat -"
+  else
+    cmd="echo $@"
+  fi
+
+  echo "[$(now)] $($cmd)" | tee -a $(today).log
+}
