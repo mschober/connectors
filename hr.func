@@ -1,0 +1,6 @@
+#!/bin/bash
+
+function hr(){
+  printf '%*s\n' "$(tput cols)" '' | tr ' ' -
+}
+export -f hr
